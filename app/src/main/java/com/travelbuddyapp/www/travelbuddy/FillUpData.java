@@ -1,11 +1,34 @@
 package com.travelbuddyapp.www.travelbuddy;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
 /**
  * Created by Alex Mac Uaid on 21/01/2018.
  */
 
-public class FillUpData {
+public class FillUpData extends Activity {
 
+  EditText costPerLitre,volumeOfLitres,odemeterReading;
+
+  Button save;
+
+  @Override
+  public void onCreate(Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_fill_up);
+    final DBHandler db = new DBHandler(this);
+    db.open();
+
+
+  }
+
+
+
+  //Attempt 1
   //declare the variables which will link to the button and SQL Lite
   private int id;
   private double costPerLitre;
@@ -61,7 +84,5 @@ public class FillUpData {
   {
     return odemeterReading;
   }
-
-
 
 }
