@@ -3,7 +3,6 @@ package com.travelbuddyapp.www.travelbuddy;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 
 /**
  * Created by Alex Mac Uaid on 21/01/2018.
@@ -11,7 +10,7 @@ import android.widget.EditText;
 
 public class FillUpData extends Activity {
 
-  EditText costPerLitre,volumeOfLitres,odemeterReading;
+ // EditText costPerLitre,volumeOfLitres,odemeterReading;
 
   Button save;
 
@@ -20,8 +19,11 @@ public class FillUpData extends Activity {
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_fill_up);
+
+    /*
     final DBHandler db = new DBHandler(this);
-    db.open();
+    Log.d("Insert: ", "Inserting ..");
+    */
 
 
   }
@@ -82,6 +84,7 @@ public class FillUpData extends Activity {
   }
   public double getOdemeterReading()
   {
+
     return odemeterReading;
   }
 

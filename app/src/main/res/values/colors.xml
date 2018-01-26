@@ -6,4 +6,5 @@
   <color name="backgroundColor">#2698d6</color>
   <color name="buttonColor">#77ccf9</color>
   <color name="buttonText">#000080 </color>
+  <color name="hintColor">#808080</color>
 </resources>
