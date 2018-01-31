@@ -6,11 +6,12 @@
   android:layout_height="match_parent"
   android:background="@color/backgroundColor"
   tools:context="com.travelbuddyapp.www.travelbuddy.FillUpActivity">
+  tools:context="com.travelbuddyapp.www.travelbuddy.FillUpActivity">
 
   <TextView
     android:id="@+id/textView"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="16dp"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
@@ -18,7 +19,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:text="FILL UP Activity " />
+    tools:text="Alex Mac Uaid " />
 
   <Button
     android:id="@+id/save"
@@ -102,52 +103,12 @@
     android:textAlignment="textStart"
     android:textSize="14sp"
     android:textStyle="bold"
-    app:layout_constraintEnd_toStartOf="@+id/odemeterReading"
+    app:layout_constraintEnd_toStartOf="@+id/odometerReading"
     app:layout_constraintHorizontal_chainStyle="packed"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/volumeOfLitresTextView" />
 
-  <EditText
-    android:id="@+id/odemeterReading"
-    android:layout_width="wrap_content"
-    android:layout_height="49dp"
-    android:layout_marginBottom="132dp"
-    android:layout_marginRight="48dp"
-    android:layout_marginStart="36dp"
-    android:layout_marginTop="80dp"
-    android:ellipsize="end"
-    android:ems="10"
-    android:hint="@string/hint_odemeter_reading"
-    android:inputType="numberDecimal"
-    android:singleLine="true"
-    android:textColorHint="@color/hintColor"
-    app:layout_constraintBottom_toTopOf="@+id/save"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/odemeterReadingTextView"
-    app:layout_constraintTop_toBottomOf="@+id/litres"
-    app:layout_constraintVertical_bias="0.192" />
-
-  <EditText
-    android:id="@+id/litres"
-    android:layout_width="wrap_content"
-    android:layout_height="49dp"
-    android:layout_marginBottom="76dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginRight="48dp"
-    android:layout_marginStart="43dp"
-    android:layout_marginTop="68dp"
-    android:ellipsize="end"
-    android:ems="10"
-    android:hint="@string/hint_volume_of_litres"
-    android:inputType="numberDecimal"
-    android:singleLine="true"
-    android:textColorHint="@color/hintColor"
-    app:layout_constraintBottom_toTopOf="@+id/odemeterReading"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/volumeOfLitresTextView"
-    app:layout_constraintTop_toBottomOf="@+id/pricePerLitre" />
 
   <EditText
     android:id="@+id/pricePerLitre"
@@ -167,6 +128,50 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintStart_toEndOf="@+id/pricePerLitreTextView"
     app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+  <EditText
+    android:id="@+id/litres"
+    android:layout_width="wrap_content"
+    android:layout_height="49dp"
+    android:layout_marginBottom="76dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="48dp"
+    android:layout_marginStart="43dp"
+    android:layout_marginTop="68dp"
+    android:ellipsize="end"
+    android:ems="10"
+    android:hint="@string/hint_volume_of_litres"
+    android:inputType="numberDecimal"
+    android:singleLine="true"
+    android:textColorHint="@color/hintColor"
+    app:layout_constraintBottom_toTopOf="@+id/odometerReading"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/volumeOfLitresTextView"
+    app:layout_constraintTop_toBottomOf="@+id/pricePerLitre" />
+
+
+  <EditText
+    android:id="@+id/odometerReading"
+    android:layout_width="wrap_content"
+    android:layout_height="49dp"
+    android:layout_marginBottom="132dp"
+    android:layout_marginRight="48dp"
+    android:layout_marginStart="36dp"
+    android:layout_marginTop="80dp"
+    android:ellipsize="end"
+    android:ems="10"
+    android:hint="@string/hint_odemeter_reading"
+    android:inputType="numberDecimal"
+    android:singleLine="true"
+    android:textColorHint="@color/hintColor"
+    app:layout_constraintBottom_toTopOf="@+id/save"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/odemeterReadingTextView"
+    app:layout_constraintTop_toBottomOf="@+id/litres"
+    app:layout_constraintVertical_bias="0.192" />
+
+
 
 </android.support.constraint.ConstraintLayout>
 

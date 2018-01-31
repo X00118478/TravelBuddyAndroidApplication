@@ -59,7 +59,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //Get the entered value and enter it into the VOLUME_OF_LITRES
     values.put(VOLUME_OF_LITRES, fillUpData.getVolumeOfLitres());
     //Get the entered value and enter it into the ODEMETER_READING
-    values.put(ODEMETER_READING, fillUpData.getOdemeterReading());
+    values.put(ODEMETER_READING, fillUpData.getOdometerReading());
     //Insert a Row
     db.insert(TABLE_FILL_UP_ENTRY, null, values);
     //Close the DB Connection
@@ -100,7 +100,7 @@ public class DBHandler extends SQLiteOpenHelper {
         fillUpData.setId(Integer.parseInt(cursor.getString(0)));
         fillUpData.setCostPerLitre(cursor.getDouble(1));
         fillUpData.setVolumeOfLitres(cursor.getDouble(2));
-        fillUpData.setOdemeterReading(cursor.getDouble(3));
+        fillUpData.setOdometerReading(cursor.getDouble(3));
 
         // Add the entries to the List
         entryList.add(fillUpData);
@@ -129,7 +129,7 @@ public class DBHandler extends SQLiteOpenHelper {
     ContentValues updateEntry = new ContentValues();
     updateEntry.put(COST_PER_LITRE, fillUpData.getCostPerLitre());
     updateEntry.put(VOLUME_OF_LITRES,fillUpData.getVolumeOfLitres());
-    updateEntry.put(ODEMETER_READING,fillUpData.getOdemeterReading());
+    updateEntry.put(ODEMETER_READING,fillUpData.getOdometerReading());
 
     //Update to ROW and return
     return db.update(TABLE_FILL_UP_ENTRY, updateEntry, ID + " =?",

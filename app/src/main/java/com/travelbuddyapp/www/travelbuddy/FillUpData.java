@@ -59,33 +59,38 @@ public class FillUpData extends Activity {
   //Setters
   public void setCostPerLitre(double costPerLitre)
   {
+
     this.costPerLitre = costPerLitre;
   }
   public void setVolumeOfLitres(double volumeOfLitres)
   {
+
+
     this.volumeOfLitres = volumeOfLitres;
-  }
-  public void setOdemeterReading(double odemeterReading)
+    }
+
+
+  public void setOdometerReading(double odemeterReading)
   {
     this.odemeterReading = odemeterReading;
   }
   //Getters
   public int getId()
   {
-    return id;
+    return this.id;
   }
   public double getCostPerLitre()
   {
-    return costPerLitre;
+    return this.costPerLitre;
   }
   public double getVolumeOfLitres()
   {
-    return volumeOfLitres;
+    return this.volumeOfLitres;
   }
-  public double getOdemeterReading()
+  public double getOdometerReading()
   {
 
-    return odemeterReading;
+    return this.odemeterReading;
   }
 
 }
