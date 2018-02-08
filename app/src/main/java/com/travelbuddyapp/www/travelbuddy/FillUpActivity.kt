@@ -6,13 +6,34 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable
+import okhttp3.OkHttpClient
+
 
 class FillUpActivity : AppCompatActivity() {
+
+  /**
+   * Mobile Service Client reference
+   */
+  private var mClient: MobileServiceClient? = null
+  /**
+   * Mobile Service Table used to access data
+   */
+  private var mToDoTable: MobileServiceTable<FillUpData>? = null
+  /**
+   * Adapter to sync the items list with the view
+   */
+  private var mAdapter: ToDoItemAdapter?=null
+
+  private var client: OkHttpClient? = null
+  var url = "https://travelbuddyireland.azurewebsites.net"
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_fill_up)
+//    TodoItem.getInstance()
 
     //Edit Text Boxes Declaration
      var pricePerLitre = findViewById<EditText>(R.id.pricePerLitre)
@@ -30,7 +51,7 @@ class FillUpActivity : AppCompatActivity() {
 
     //SAVE BUTTON
     //Save the new Entry of the data and return to the main activity
-    saveEntry = findViewById<Button>(R.id.save)
+    saveEntry = findViewById(R.id.save)
     //When Save is hit get the data from the text fields in the fill_up_activity
     saveEntry.setOnClickListener {
 
@@ -51,71 +72,44 @@ class FillUpActivity : AppCompatActivity() {
       //object of FillUpData()
       val fillUpData = FillUpData()
 
-      if (odometerReading.equals(0))
-      {
-        Toast.makeText(this,"You must enter a decimal into the Odometer Field!", Toast.LENGTH_SHORT).show()
-
-
-      }
-
-
       //Set the values
-      fillUpData.setVolumeOfLitres(volumeOfLitres)
-      fillUpData.setCostPerLitre(costPerLitre)
-      fillUpData.setOdometerReading(odometerReading)
+      fillUpData.volumeOfLitres = volumeOfLitres
+      fillUpData.costPerLitre = costPerLitre
+      fillUpData.odometerReading = odometerReading
 
-      //fillUpData.costPerLitre
+
+
+        // Mobile Service URL and key
+        mClient = MobileServiceClient(
+          url,
+          this)
+
+//      try {
+//          ApiCall.POST(mClient,url, )
+//      }
+
+
 
       val saveIntent = Intent(this, MainActivity::class.java)
       startActivity(saveIntent)
 
     }
 
-
-//     var priceValue = 0.0
-//     var litreValue = 0.0
-//     var odometerValue = 0.0
-     //Initiate an instance of FillUpData()
-
-
-
     // Create a DB Object to add the entries.
     val dbHandler = DBHandler(this)
-
-    //Create Database Object
-    //DBHandler database = new DBHandler();
-    //val dataBase = DBHandler(0,pricePerLitre,litresEditText,odometerEditText)
-
-
 
 
     //Display the inserts in a log.
     Log.d("Insert: ", "Inserting ......")
 
 
-
-
-
       //Cancel the Add new Fill up entry request
-      cancelEntry = findViewById<Button>(R.id.cancel)
+      cancelEntry = findViewById(R.id.cancel)
       cancelEntry.setOnClickListener {
         // Handler code here.
         val cancelIntent = Intent(this, MainActivity::class.java)
         startActivity(cancelIntent)
       }
 
-    /*
-    //Retrieve data from the textFields
-    fun saveDataEntry(view: View)
-    {
-     // EditText pricePerLitreEditText = (EditText) findViewById(R.id.pricePerLitre)
-        //val pricePerLitreEditText = findViewById<EditText>(R.id.pricePerLitre)
-    //  Double pricePerLitreEditTextValue = pricePerLitreEditText.getText().toString();
-     // val litresEditText = findViewById<EditText>(R.id.litres)
-    //  val odometerEditText = findViewById<EditText>(R.id.odometerReading)
-      //val intent = Intent(this, FillUpActivity::class.java)
-    }
-
-  */
   }
 }

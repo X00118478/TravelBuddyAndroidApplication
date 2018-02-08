@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class FillUpData extends Activity {
 
- // EditText costPerLitre,volumeOfLitres,odemeterReading;
+ // EditText costPerLitre,volumeOfLitres,odometerReading;
 
   Button save;
 
@@ -27,15 +27,13 @@ public class FillUpData extends Activity {
 
 
   }
-
-
-
   //Attempt 1
   //declare the variables which will link to the button and SQL Lite
+
   private int id;
   private double costPerLitre;
   private double volumeOfLitres;
-  private double odemeterReading;
+  private double odometerReading;
 
   //Default Constructor
   public FillUpData()
@@ -44,13 +42,14 @@ public class FillUpData extends Activity {
   }
 
   //Overloaded Constructor
-  public FillUpData(int id, double costPerLitre,double volumeOfLitres,double odemeterReading)
+  public FillUpData(int id, double costPerLitre,double volumeOfLitres,double odometerReading)
   {
     this.id = id;
     this.costPerLitre = costPerLitre;
     this.volumeOfLitres = volumeOfLitres;
-    this.odemeterReading = odemeterReading;
+    this.odometerReading = odometerReading;
   }
+
 
   public void setId(int id)
   {
@@ -72,7 +71,7 @@ public class FillUpData extends Activity {
 
   public void setOdometerReading(double odemeterReading)
   {
-    this.odemeterReading = odemeterReading;
+    this.odometerReading = odemeterReading;
   }
   //Getters
   public int getId()
@@ -90,7 +89,7 @@ public class FillUpData extends Activity {
   public double getOdometerReading()
   {
 
-    return this.odemeterReading;
+    return this.odometerReading;
   }
 
 }
