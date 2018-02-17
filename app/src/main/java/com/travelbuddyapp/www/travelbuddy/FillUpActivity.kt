@@ -6,30 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import com.microsoft.windowsazure.mobileservices.MobileServiceClient
-import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable
-import okhttp3.OkHttpClient
+//import okhttp3.OkHttpClient
 
 
 class FillUpActivity : AppCompatActivity() {
-
-  /**
-   * Mobile Service Client reference
-   */
-  private var mClient: MobileServiceClient? = null
-  /**
-   * Mobile Service Table used to access data
-   */
-  private var mToDoTable: MobileServiceTable<FillUpData>? = null
-  /**
-   * Adapter to sync the items list with the view
-   */
-  private var mAdapter: ToDoItemAdapter?=null
-
-  private var client: OkHttpClient? = null
-  var url = "https://travelbuddyireland.azurewebsites.net"
-
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_fill_up)
@@ -77,20 +57,7 @@ class FillUpActivity : AppCompatActivity() {
       fillUpData.costPerLitre = costPerLitre
       fillUpData.odometerReading = odometerReading
 
-
-
-        // Mobile Service URL and key
-        mClient = MobileServiceClient(
-          url,
-          this)
-
-//      try {
-//          ApiCall.POST(mClient,url, )
-//      }
-
-
-
-      val saveIntent = Intent(this, MainActivity::class.java)
+      val saveIntent = Intent(this, Timeline::class.java)
       startActivity(saveIntent)
 
     }
@@ -107,7 +74,7 @@ class FillUpActivity : AppCompatActivity() {
       cancelEntry = findViewById(R.id.cancel)
       cancelEntry.setOnClickListener {
         // Handler code here.
-        val cancelIntent = Intent(this, MainActivity::class.java)
+        val cancelIntent = Intent(this, Timeline::class.java)
         startActivity(cancelIntent)
       }
 
