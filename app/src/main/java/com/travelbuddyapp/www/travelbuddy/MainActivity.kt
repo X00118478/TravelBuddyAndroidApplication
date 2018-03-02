@@ -1,5 +1,26 @@
 package com.travelbuddyapp.www.travelbuddy
 
+/***************************************************************************************
+
+ *    Usage: Based On
+ *    Title: Firebase Authentication using Kotlin 2
+ *    Author: Winision
+ *    Date: 2018
+ *    Code version: 1.0
+ *    Availability: https://www.youtube.com/watch?v=ZhD_J3kcSjw
+ *
+ ***************************************************************************************/
+/***************************************************************************************
+
+ *    Usage: Based On
+ *    Title: Set up Firebase Authentication for Android
+ *    Author: Firebase
+ *    Date: 2018
+ *    Code version: 1.0
+ *    Availability: https://firebase.google.com/docs/auth/android/start/
+ *
+ ***************************************************************************************/
+
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -21,9 +42,11 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
+    //loginButton & registerTest is non nullable
     val loginButton = findViewById<View>(R.id.loginButton) as Button
     val registerText = findViewById<View>(R.id.registerText) as TextView
 
+    //when the button is selected then progress to the method call
     loginButton.setOnClickListener(View.OnClickListener
     {
       view -> login()
@@ -36,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
   }
 
+  //this method will check the details exist in the Firebase DB & allow the user to log in or stop them completely Displaying a message in each case
   private fun login () {
     val emailTxt = findViewById<View>(R.id.emailText) as EditText
     var email = emailTxt.text.toString()
@@ -46,17 +70,18 @@ class MainActivity : AppCompatActivity() {
       this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener ( this, OnCompleteListener<AuthResult> { task ->
         if (task.isSuccessful) {
           startActivity(Intent(this, Timeline::class.java))
-          Toast.makeText(this, "Successfully Logged in :)", Toast.LENGTH_LONG).show()
+          Toast.makeText(this, "Log in Successful", Toast.LENGTH_LONG).show()
         } else {
-          Toast.makeText(this, "Error Logging in :(", Toast.LENGTH_SHORT).show()
+          Toast.makeText(this, "Error Logging in.", Toast.LENGTH_SHORT).show()
         }
       })
 
     }else {
-      Toast.makeText(this, "Please fill up the Credentials :|", Toast.LENGTH_SHORT).show()
+      Toast.makeText(this, "Text fields can not be blank!", Toast.LENGTH_SHORT).show()
     }
   }
 
+  //This method opens the register activity  class
   private fun register () {
     val intent = Intent(this, register::class.java)
     startActivity(intent)

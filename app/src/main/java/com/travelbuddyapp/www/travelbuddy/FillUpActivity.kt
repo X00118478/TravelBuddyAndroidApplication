@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import com.google.firebase.database.FirebaseDatabase
+
+
+
 //import okhttp3.OkHttpClient
 
 
@@ -25,6 +30,8 @@ class FillUpActivity : AppCompatActivity() {
      //Button Declaration
      var saveEntry = Button(this)
      var cancelEntry = Button(this)
+    //Count amount of times the save button is pushed
+     var counter = 0
 
 
 
@@ -35,6 +42,8 @@ class FillUpActivity : AppCompatActivity() {
     //When Save is hit get the data from the text fields in the fill_up_activity
     saveEntry.setOnClickListener {
 
+      //Increments the counter each time save is hit.
+      counter++
       //Converting Value to toString then parse to Double.
       var pricePerLitreValue = pricePerLitre.text.toString()
       //Parse the toString() to a Double so the value can be stored in the DB
@@ -53,9 +62,34 @@ class FillUpActivity : AppCompatActivity() {
       val fillUpData = FillUpData()
 
       //Set the values
+      fillUpData.id = counter
       fillUpData.volumeOfLitres = volumeOfLitres
       fillUpData.costPerLitre = costPerLitre
       fillUpData.odometerReading = odometerReading
+
+
+      if(volumeOfLitres != null && costPerLitre != null && odometerReading != null)
+        {
+          try {
+            //write to the FireBase database
+            val database = FirebaseDatabase.getInstance()
+            val myRef = database.getReference("FillUps")
+            myRef.setValue(counter)
+            myRef.setValue(volumeOfLitres)
+            myRef.setValue(costPerLitre)
+            myRef.setValue(odometerReading)
+          }
+          catch (e:Exception)
+          {
+
+            Toast.makeText(this,"Save successful",Toast.LENGTH_LONG).show()
+          }
+
+        }
+      else
+      {
+        Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
+      }
 
       val saveIntent = Intent(this, Timeline::class.java)
       startActivity(saveIntent)

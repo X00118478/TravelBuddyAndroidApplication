@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 
+
 /**
  * Created by Alex Mac Uaid on 21/01/2018.
  */
+
 
 public class FillUpData extends Activity {
 
@@ -35,6 +37,10 @@ public class FillUpData extends Activity {
   private double volumeOfLitres;
   private double odometerReading;
 
+
+  int listSize = getId();
+
+
   //Default Constructor
   public FillUpData()
   {
@@ -44,6 +50,7 @@ public class FillUpData extends Activity {
   //Overloaded Constructor
   public FillUpData(int id, double costPerLitre,double volumeOfLitres,double odometerReading)
   {
+
     this.id = id;
     this.costPerLitre = costPerLitre;
     this.volumeOfLitres = volumeOfLitres;
@@ -53,7 +60,23 @@ public class FillUpData extends Activity {
 
   public void setId(int id)
   {
-    this.id = id;
+    for(int i = 0; i < listSize;i++)
+    {
+      id = (setIncrementedID() + i);
+      this.id = id;
+    }
+
+  }
+
+  public  int setIncrementedID()
+  {
+    Number num = getId();
+    if (num == null)
+    {
+      return 1;
+    }
+    else
+      return ((int)num + 1);
   }
   //Setters
   public void setCostPerLitre(double costPerLitre)
