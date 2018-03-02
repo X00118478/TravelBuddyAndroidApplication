@@ -3,10 +3,11 @@ package com.travelbuddyapp.www.travelbuddy
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
@@ -20,6 +21,11 @@ class FillUpActivity : AppCompatActivity() {
     setContentView(R.layout.activity_fill_up)
 //    TodoItem.getInstance()
 
+    lateinit var mDatabase : DatabaseReference
+
+    var mAuth = FirebaseAuth.getInstance()
+    var user = FirebaseAuth.getInstance().currentUser
+
     //Edit Text Boxes Declaration
      var pricePerLitre = findViewById<EditText>(R.id.pricePerLitre)
     //focus the keyboard on the field then progress
@@ -32,7 +38,18 @@ class FillUpActivity : AppCompatActivity() {
      var cancelEntry = Button(this)
     //Count amount of times the save button is pushed
      var counter = 0
+    val savesuccess = Intent(this, Timeline::class.java)
+    val savefailure = Intent(this, FillUpActivity::class.java)
 
+
+    //Cloud Storage
+    //Storing on the Cloud
+    //write to the FireBase database
+    val database = FirebaseDatabase.getInstance()
+    val myFireId = database.getReference("ID")
+    val myFireVolumeOfLitres = database.getReference("VolumeOfLitres")
+    val myFireCostPerLitreCostPerLitre = database.getReference("CostPerLitre")
+    val myFireOdometerReading = database.getReference("OdometerReading")
 
 
 
@@ -58,50 +75,71 @@ class FillUpActivity : AppCompatActivity() {
       var odometerValue = odometerEditText.text.toString()
       var odometerReading = java.lang.Double.parseDouble(odometerValue)
 
-      //object of FillUpData()
-      val fillUpData = FillUpData()
-
-      //Set the values
-      fillUpData.id = counter
-      fillUpData.volumeOfLitres = volumeOfLitres
-      fillUpData.costPerLitre = costPerLitre
-      fillUpData.odometerReading = odometerReading
-
 
       if(volumeOfLitres != null && costPerLitre != null && odometerReading != null)
         {
           try {
-            //write to the FireBase database
-            val database = FirebaseDatabase.getInstance()
-            val myRef = database.getReference("FillUps")
-            myRef.setValue(counter)
-            myRef.setValue(volumeOfLitres)
-            myRef.setValue(costPerLitre)
-            myRef.setValue(odometerReading)
+
+            //Increments the counter each time save is hit.
+            counter++
+
+            //Storing on the client side
+            //object of FillUpData()
+            val fillUpData = FillUpData()
+
+            //Set the values
+            fillUpData.id = counter
+            fillUpData.volumeOfLitres = volumeOfLitres
+            fillUpData.costPerLitre = costPerLitre
+            fillUpData.odometerReading = odometerReading
+
+            //Cloud Storage
+            myFireId.push().setValue(counter)
+            myFireVolumeOfLitres.push().setValue(volumeOfLitres)
+            myFireCostPerLitreCostPerLitre.push().setValue(costPerLitre)
+            myFireOdometerReading.push().setValue(odometerReading)
+//            val uid = user!!.uid
+//            mDatabase.child(uid).child("Names").setValue(volumeOfLitres)
+//            mDatabase.child(uid).child("Names").setValue(costPerLitre)
+//            mDatabase.child(uid).child("Names").setValue(odometerReading)
+//            myRef.child("Names").push().setValue("VolumeOfLitres",volumeOfLitres)
+//            myRef.child("Names").push().setValue("CostPerLitre",costPerLitre)
+//            myRef.child("Names").push().setValue("OdometerReading",odometerReading)
+
+            startActivity(savesuccess)
+
           }
           catch (e:Exception)
           {
 
-            Toast.makeText(this,"Save successful",Toast.LENGTH_LONG).show()
-          }
+
+            Toast.makeText(this,"Save unsuccessful, Try again.",Toast.LENGTH_LONG).show()
+            startActivity(savefailure)}
 
         }
       else
       {
-        Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
-      }
+        try
+        {
+          Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
 
-      val saveIntent = Intent(this, Timeline::class.java)
-      startActivity(saveIntent)
+          startActivity(savefailure)
+        }
+        catch (e:Exception)
+        {
+          Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
+          startActivity(savefailure)
+        }
+      }
 
     }
 
     // Create a DB Object to add the entries.
-    val dbHandler = DBHandler(this)
+//    val dbHandler = DBHandler(this)
 
 
     //Display the inserts in a log.
-    Log.d("Insert: ", "Inserting ......")
+//    Log.d("Insert: ", "Inserting ......")
 
 
       //Cancel the Add new Fill up entry request

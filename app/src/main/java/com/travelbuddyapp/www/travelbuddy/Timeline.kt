@@ -25,6 +25,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import android.widget.ListView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 
@@ -39,6 +40,10 @@ class Timeline : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_dashboard)
 
+    val listView = findViewById<ListView>(R.id.main_listview)
+
+
+
 //    TodoItem.getInstance()
     var fillupbutton = Button(this)
     fillupbutton = findViewById<Button>(R.id.newFillUp)
@@ -48,6 +53,4 @@ class Timeline : AppCompatActivity() {
       startActivity(intent)
     }
   }
-
-
 }
