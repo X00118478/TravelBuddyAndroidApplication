@@ -9,6 +9,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Arrays.asList
+
 
 
 
@@ -51,7 +53,17 @@ class FillUpActivity : AppCompatActivity() {
     val myFireCostPerLitreCostPerLitre = database.getReference("CostPerLitre")
     val myFireOdometerReading = database.getReference("OdometerReading")
 
-
+//    val n = ArrayList<String>()
+//
+////your button
+//    val b: Button
+//
+/////your edittext
+//    val e: EditText
+//
+//
+//    if (saveEntry.isPressed)
+//      n.add(edit.getText().toString())
 
     //SAVE BUTTON
     //Save the new Entry of the data and return to the main activity
@@ -74,6 +86,13 @@ class FillUpActivity : AppCompatActivity() {
       //Convert value to toString() then parse to Type Double
       var odometerValue = odometerEditText.text.toString()
       var odometerReading = java.lang.Double.parseDouble(odometerValue)
+
+      val priceList = ArrayList(asList(0.0))
+      val litresList = ArrayList(asList(0.0))
+      if (saveEntry.isPressed){
+        priceList.add(odometerReading)
+        litresList.add(volumeOfLitres)}
+
 
 
       if(volumeOfLitres != null && costPerLitre != null && odometerReading != null)
