@@ -74,10 +74,11 @@ class Timeline : AppCompatActivity(), Runnable {
     graphFuel.addSeries(seriesFuel)
     graphFuel.title = "Fuel Usage (Monthly)"
 
+    graphFuel.getViewport().setScalable(true);
+    graphFuel.getViewport().setScalableY(true);
+
     val graphPrediciton = findViewById<View>(R.id.graphPrediction) as GraphView
-    val seriesPrediciton = LineGraphSeries<DataPoint>(arrayOf<DataPoint>(DataPoint(0.0, 0.0), DataPoint(1.0, 5.0), DataPoint(2.0, 3.0), DataPoint(3.0, 2.0), DataPoint(10.0, 60.0)))
-    graphPrediciton.addSeries(seriesPrediciton)
-      graphPrediciton.title = "Cost Prediciton (Yearly)"
+    graphPrediciton.title = "Cost Prediciton (Yearly)"
 
 // custom label formatter to show currency "EUR"
     graphPrice.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
@@ -91,6 +92,8 @@ class Timeline : AppCompatActivity(), Runnable {
         }
       }
     }
+    graphPrice.getViewport().setScalable(true);
+    graphPrice.getViewport().setScalableY(true);
 
 
     val tipList = ArrayList<String>()
@@ -138,6 +141,36 @@ class Timeline : AppCompatActivity(), Runnable {
     }
 
 
+    // prediction Cost
+    val points = arrayOfNulls<DataPoint>(100)
+    for (i in points.indices) {
+      points[i] = DataPoint(i.toDouble(), Math.sin(i * 0.5) * 20.0 * (Math.random() * 10 + 1))
+    }
+    val series = LineGraphSeries<DataPoint>(points)
+
+    // set manual X bounds
+    graphPrediciton.getViewport().setYAxisBoundsManual(true);
+    graphPrediciton.getViewport().setMinY(0.0)
+    graphPrediciton.getViewport().setMaxY(150.0);
+
+    graphPrediciton.getViewport().setXAxisBoundsManual(true);
+    graphPrediciton.getViewport().setMinX(0.0);
+    graphPrediciton.getViewport().setMaxX(80.0);
+
+    // enable scaling and scrolling
+    graphPrediciton.getViewport().setScalable(true);
+    graphPrediciton.getViewport().setScalableY(true);
+
+    graphPrediciton.addSeries(series);
+
+//userDataCall
+    var userDataCallbutton = Button(this)
+    userDataCallbutton = findViewById<Button>(R.id.userDataCall)
+    userDataCallbutton .setOnClickListener {
+      // Handler code here.
+      val intent = Intent(this, UserData::class.java)
+      startActivity(intent)
+    }
 
 //    TodoItem.getInstance()
     var fillupbutton = Button(this)

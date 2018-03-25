@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
           startActivity(Intent(this, Timeline::class.java))
           Toast.makeText(this, "Log in Successful", Toast.LENGTH_LONG).show()
         } else {
-          Toast.makeText(this, "Error Logging in.", Toast.LENGTH_SHORT).show()
+          Toast.makeText(this, "The email or password you have entered is invalid. ", Toast.LENGTH_SHORT).show()
         }
       })
 

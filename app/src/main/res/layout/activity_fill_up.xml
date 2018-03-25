@@ -6,7 +6,6 @@
   android:layout_height="match_parent"
   android:background="@color/backgroundColor"
   tools:context="com.travelbuddyapp.www.travelbuddy.FillUpActivity">
-  tools:context="com.travelbuddyapp.www.travelbuddy.FillUpActivity">
 
   <TextView
     android:id="@+id/textView"
