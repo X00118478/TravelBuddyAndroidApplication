@@ -74,8 +74,8 @@ class Timeline : AppCompatActivity(), Runnable {
     graphFuel.addSeries(seriesFuel)
     graphFuel.title = "Fuel Usage (Monthly)"
 
-    graphFuel.getViewport().setScalable(true);
-    graphFuel.getViewport().setScalableY(true);
+    graphFuel.viewport.isScalable = true
+    graphFuel.viewport.setScalableY(true)
 
     val graphPrediciton = findViewById<View>(R.id.graphPrediction) as GraphView
     graphPrediciton.title = "Cost Prediciton (Yearly)"
@@ -92,8 +92,8 @@ class Timeline : AppCompatActivity(), Runnable {
         }
       }
     }
-    graphPrice.getViewport().setScalable(true);
-    graphPrice.getViewport().setScalableY(true);
+    graphPrice.viewport.isScalable = true
+    graphPrice.viewport.setScalableY(true)
 
 
     val tipList = ArrayList<String>()
@@ -149,19 +149,19 @@ class Timeline : AppCompatActivity(), Runnable {
     val series = LineGraphSeries<DataPoint>(points)
 
     // set manual X bounds
-    graphPrediciton.getViewport().setYAxisBoundsManual(true);
-    graphPrediciton.getViewport().setMinY(0.0)
-    graphPrediciton.getViewport().setMaxY(150.0);
+    graphPrediciton.viewport.isYAxisBoundsManual = true
+    graphPrediciton.viewport.setMinY(0.0)
+    graphPrediciton.viewport.setMaxY(150.0)
 
-    graphPrediciton.getViewport().setXAxisBoundsManual(true);
-    graphPrediciton.getViewport().setMinX(0.0);
-    graphPrediciton.getViewport().setMaxX(80.0);
+    graphPrediciton.viewport.isXAxisBoundsManual = true
+    graphPrediciton.viewport.setMinX(0.0)
+    graphPrediciton.viewport.setMaxX(80.0)
 
     // enable scaling and scrolling
-    graphPrediciton.getViewport().setScalable(true);
-    graphPrediciton.getViewport().setScalableY(true);
+    graphPrediciton.viewport.isScalable = true
+    graphPrediciton.viewport.setScalableY(true)
 
-    graphPrediciton.addSeries(series);
+    graphPrediciton.addSeries(series)
 
 //userDataCall
     var userDataCallbutton = Button(this)

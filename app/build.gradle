@@ -29,18 +29,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.google.firebase:firebase-database:11.0.4'
-    implementation 'com.google.firebase:firebase-auth:11.0.4'
+    implementation 'com.google.firebase:firebase-database:12.0.1'
+    implementation 'com.google.firebase:firebase-auth:12.0.1'
     implementation 'com.android.support:design:26.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    //+-compile 'com.microsoft.azure:azure-mobile-android:3.4.0@aar'
-    // compile 'com.google.code.gson:gson:2.7'
-    // compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    // implementation files('libs/azure-mobile-android-3.4.0.jar')
     compile 'com.jjoe64:graphview:4.2.1'
+    compile 'com.google.gms:google-services:3.2.1'
+  implementation 'com.google.android.gms:play-services-maps:12.0.1'
 }
 
 
@@ -52,5 +50,4 @@ repositories {
 
 
 apply plugin: 'com.google.gms.google-services'
-
 apply plugin: 'kotlin-android-extensions'

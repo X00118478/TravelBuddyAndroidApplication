@@ -112,6 +112,19 @@ class FillUpActivity : AppCompatActivity() {
             fillUpData.costPerLitre = costPerLitre
             fillUpData.odometerReading = odometerReading
 
+            if(pricePerLitreValue.isEmpty())
+            {
+              pricePerLitre.error = "Please enter a Price Per Litre."
+            }
+            if(litresValue.isEmpty())
+            {
+              litresEditText.error = "Please enter total amount of Litre."
+            }
+            if(odometerValue.isEmpty())
+            {
+              odometerEditText.error = "Please enter Odometer Reading."
+            }
+
             //Cloud Storage
             myFireId.push().setValue(counter)
             myFireVolumeOfLitres.push().setValue(volumeOfLitres)
@@ -124,6 +137,7 @@ class FillUpActivity : AppCompatActivity() {
 //            myRef.child("Names").push().setValue("VolumeOfLitres",volumeOfLitres)
 //            myRef.child("Names").push().setValue("CostPerLitre",costPerLitre)
 //            myRef.child("Names").push().setValue("OdometerReading",odometerReading)
+
 
             startActivity(savesuccess)
 

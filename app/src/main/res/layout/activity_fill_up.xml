@@ -7,19 +7,6 @@
   android:background="@color/backgroundColor"
   tools:context="com.travelbuddyapp.www.travelbuddy.FillUpActivity">
 
-  <TextView
-    android:id="@+id/textView"
-    android:layout_width="wrap_content"
-    android:layout_height="16dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:text="Alex Mac Uaid "
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:text="Alex Mac Uaid " />
-
   <Button
     android:id="@+id/save"
     android:layout_width="150dp"
@@ -65,7 +52,7 @@
     android:layout_marginTop="136dp"
     android:text="@string/price_per_litre"
     android:textAlignment="textStart"
-    android:textSize="14sp"
+    android:textSize="16sp"
     android:textStyle="bold"
     app:layout_constraintEnd_toStartOf="@+id/pricePerLitre"
     app:layout_constraintHorizontal_bias="0.222"
@@ -83,7 +70,7 @@
     android:layout_marginTop="88dp"
     android:text="@string/volume_of_litres"
     android:textAlignment="textStart"
-    android:textSize="14sp"
+    android:textSize="16sp"
     android:textStyle="bold"
     app:layout_constraintEnd_toStartOf="@+id/litres"
     app:layout_constraintLeft_toLeftOf="parent"
@@ -92,7 +79,7 @@
 
   <TextView
     android:id="@+id/odemeterReadingTextView"
-    android:layout_width="72dp"
+    android:layout_width="100dp"
     android:layout_height="34dp"
     android:layout_marginEnd="8dp"
     android:layout_marginLeft="16dp"
@@ -100,7 +87,7 @@
     android:layout_marginTop="96dp"
     android:text="@string/odemeter_reading"
     android:textAlignment="textStart"
-    android:textSize="14sp"
+    android:textSize="16sp"
     android:textStyle="bold"
     app:layout_constraintEnd_toStartOf="@+id/odometerReading"
     app:layout_constraintHorizontal_chainStyle="packed"
@@ -116,7 +103,7 @@
     android:layout_marginEnd="8dp"
     android:layout_marginRight="16dp"
     android:layout_marginStart="44dp"
-    android:layout_marginTop="100dp"
+    android:layout_marginTop="124dp"
     android:ellipsize="end"
     android:ems="10"
     android:hint="@string/hint_price_per_litre"
@@ -126,7 +113,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintStart_toEndOf="@+id/pricePerLitreTextView"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <EditText
     android:id="@+id/litres"
