@@ -10,8 +10,8 @@ import android.widget.TextView
 /**
  * Created by AlexMcQuade on 05/04/2018.
  */
-class TravelAdapter(val mCtx: Context,val  layoutResId: Int,val travelList: List<FillUpData>)
-  :ArrayAdapter<FillUpData>(mCtx, layoutResId, travelList)
+class TravelAdapter(val mCtx: Context,val  layoutResId: Int,val travelList: List<Travel>)
+  :ArrayAdapter<Travel>(mCtx, layoutResId, travelList)
 {
   override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -24,6 +24,8 @@ class TravelAdapter(val mCtx: Context,val  layoutResId: Int,val travelList: List
 
     var pricePerLitreValue = fillup.costPerLitre.toString()
     current_Expense.text = pricePerLitreValue
+
+
 
     return view
   }
