@@ -7,49 +7,7 @@
   android:background="@color/backgroundColor"
   tools:context="com.travelbuddyapp.www.travelbuddy.UserData">
 
-  <TextView
-    android:id="@+id/textView3"
-    android:layout_width="154dp"
-    android:layout_height="34dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginStart="24dp"
-    android:layout_marginTop="24dp"
-    android:text="@string/expense_to_date"
-    android:textColor="@color/UserText"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+  <include layout="@layout/content" />
 
-  <TextView
-    android:id="@+id/current_Expense"
-    android:layout_width="151dp"
-    android:layout_height="36dp"
-    android:layout_marginRight="36dp"
-    android:layout_marginTop="24dp"
-    android:ems="10"
-    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-    android:textColor="@color/UserText"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/textView3"
-    app:layout_constraintTop_toTopOf="parent" />
-
-  <ListView
-    android:id="@+id/listView"
-    android:layout_width="394dp"
-    android:layout_height="485dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.686" />
 
 </android.support.constraint.ConstraintLayout>

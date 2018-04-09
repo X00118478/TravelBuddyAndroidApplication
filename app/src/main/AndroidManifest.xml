@@ -28,7 +28,16 @@
       android:label="@string/title_add_new_fill_up"
       android:parentActivityName=".Timeline">
 
+
       <!-- meta-data tag for API level 15 & Lower support -->
+      <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".MainActivity" />
+    </activity>
+    <activity
+      android:name=".UserGuide"
+      android:label="@string/user_guide"
+      android:parentActivityName=".Timeline">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
         android:value=".MainActivity" />

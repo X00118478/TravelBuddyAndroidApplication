@@ -42,7 +42,7 @@
   <com.jjoe64.graphview.GraphView
     android:id="@+id/graphPrediction"
     android:layout_width="200dip"
-    android:layout_height="200dip"
+    android:layout_height="180dip"
     android:layout_marginBottom="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginLeft="16dp"
@@ -131,15 +131,15 @@
 
   <Button
     android:id="@+id/userDataCall"
-    android:layout_width="103dp"
-    android:layout_height="166dp"
+    android:layout_width="108dp"
+    android:layout_height="45dp"
     android:layout_marginBottom="8dp"
     android:layout_marginEnd="24dp"
     android:layout_marginRight="16dp"
     android:layout_marginStart="56dp"
     android:layout_marginTop="8dp"
     android:background="@drawable/rectangle_button"
-    android:text="Click here to View More Data!"
+    android:text="User Data!"
     android:textColor="@color/buttonText"
     app:layout_constraintBottom_toTopOf="@+id/refresh"
     app:layout_constraintEnd_toEndOf="parent"
@@ -147,6 +147,26 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintStart_toEndOf="@+id/graphPrediction"
     app:layout_constraintTop_toBottomOf="@+id/graphprice"
-    app:layout_constraintVertical_bias="0.122" />
+    app:layout_constraintVertical_bias="0.154" />
+
+  <Button
+    android:id="@+id/locateGarage"
+    android:layout_width="103dp"
+    android:layout_height="57dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/rectangle_button"
+    android:text="@string/locate_Closest_Garage"
+    android:textColor="@color/buttonText"
+    app:layout_constraintBottom_toTopOf="@+id/refresh"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.41"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/graphPrediction"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.725" />
 
 </android.support.constraint.ConstraintLayout>

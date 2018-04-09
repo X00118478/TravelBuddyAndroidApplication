@@ -8,12 +8,13 @@ import com.google.firebase.database.*
 
 class UserData : AppCompatActivity() {
 
-  lateinit var mDatabase : DatabaseReference
+  lateinit var mDatabase: DatabaseReference
   var mAuth = FirebaseAuth.getInstance()
   var user = FirebaseAuth.getInstance().currentUser
   val database = FirebaseDatabase.getInstance()
-  val myFireCostPerLitreCostPerLitre = database.getReference("costPerLitre")
-  lateinit var fillUpCostList: MutableList<Travel>
+  val myFireCostPerLitreCostPerLitre = database.getReference("CostPerLitre")
+  val costMap = HashMap<Double, Travel>()
+  lateinit var fillUpCostList: ArrayList<Travel>
   lateinit var listView: ListView
 //  val costlist : ArrayList<Double>()
 
@@ -22,7 +23,7 @@ class UserData : AppCompatActivity() {
     setContentView(R.layout.activity_user_data)
 
 //    initCost()
-    fillUpCostList = mutableListOf()
+    fillUpCostList = ArrayList()
 
     listView = findViewById(R.id.listView)
     //Edit Text Boxes Declaration
@@ -41,13 +42,10 @@ class UserData : AppCompatActivity() {
       override fun onDataChange(p0: DataSnapshot?) {
         if (p0!!.exists())
         {
-
-          for (h in p0.children)
-          {
-            fillUpCostList.clear()
-            val fillUpDataTotal = h.getValue(Travel::class.java)
-            fillUpCostList.add(fillUpDataTotal!!)
-          }
+          fillUpCostList.clear()
+          p0.children
+            .map { it.getValue(Travel::class.java) }
+            .forEach { fillUpCostList.add(it!!) }
           val adapter = TravelAdapter(applicationContext, R.layout.activity_user_data,fillUpCostList)
           listView.adapter = adapter
         }
@@ -59,27 +57,23 @@ class UserData : AppCompatActivity() {
 
     })
 
-//    var overallCost = costPerLitre + currentExpenseDouble
 
-
-//    currentExpense.text = overallCost.toString()
-
-  }
-
-//  private fun initCost() {
-//    val listener = object : ValueEventListener {
-//      override fun onDataChange(dataSnapshot: DataSnapshot) {
-//        costlist.clear()
-//        dataSnapshot.(costlist) { it.getValue<FillUpData>(FillUpData::class.java) }
+//    val rootRef = myFireCostPerLitreCostPerLitre.child("CostPerLitre")
+//    rootRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//      override fun onCancelled(error: DatabaseError?) {
+//        println(error!!.message)
 //      }
 //
-//      override fun onCancelled(databaseError: DatabaseError) {
-//        println("loadPost:onCancelled ${databaseError.toException()}")
+//      override fun onDataChange(snapshot: DataSnapshot?) {
+//        val children = snapshot!!.children
+//        children.forEach {
+//          val adapter = TravelAdapter(applicationContext, R.layout.activity_user_data,fillUpCostList)
+//          listView.adapter = adapter
+//          println(it.toString())
+//        }
 //      }
-//    }
-//    firebaseData.child("salads").addListenerForSingleValueEvent(listener)
-//  }
+//    })
 
 
-
+  }
 }

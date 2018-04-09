@@ -25,6 +25,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -35,6 +37,8 @@ import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import java.util.*
+
+
 
 
 
@@ -62,6 +66,8 @@ class Timeline : AppCompatActivity(), Runnable {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_dashboard)
+
+    supportActionBar
 
     // Graphs on the Dashboard.
     val graphPrice = findViewById<View>(R.id.graphprice) as GraphView
@@ -179,6 +185,7 @@ class Timeline : AppCompatActivity(), Runnable {
       // Handler code here.
       val intent = Intent(this, FillUpActivity::class.java)
       startActivity(intent)
+
     }
 
     var refreshbutton = Button(this)
@@ -186,6 +193,46 @@ class Timeline : AppCompatActivity(), Runnable {
     refreshbutton .setOnClickListener {
       // Handler code here.
       startActivity(intent)
+      finish()
     }
   }
+
+
+
+  fun userGuide(){
+    //Launch the User Guide Activity
+    val intent = Intent(this, UserGuide::class.java)
+    startActivity(intent)
+
+  }
+
+  private fun logoutUser() {
+    // Launching the login activity
+    val intent = Intent(this, MainActivity::class.java)
+    startActivity(intent)
+    finish()
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    val inflater = menuInflater
+    inflater.inflate(R.menu.menu_user_data, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    // Handle item selection
+    return when {
+        item.itemId == R.id.user_guide -> {
+          userGuide()
+          true
+        }
+        item.itemId == R.id.action_logout -> {
+          logoutUser()
+           true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+  }
+
+
 }

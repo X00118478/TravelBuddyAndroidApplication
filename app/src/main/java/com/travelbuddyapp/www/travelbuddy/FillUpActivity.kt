@@ -140,6 +140,7 @@ class FillUpActivity : AppCompatActivity() {
 
 
             startActivity(savesuccess)
+            finish()
 
           }
           catch (e:Exception)
@@ -147,7 +148,9 @@ class FillUpActivity : AppCompatActivity() {
 
 
             Toast.makeText(this,"Save unsuccessful, Try again.",Toast.LENGTH_LONG).show()
-            startActivity(savefailure)}
+            startActivity(savefailure)
+            finish()
+          }
 
         }
       else
@@ -157,11 +160,13 @@ class FillUpActivity : AppCompatActivity() {
           Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
 
           startActivity(savefailure)
+          finish()
         }
         catch (e:Exception)
         {
           Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
           startActivity(savefailure)
+          finish()
         }
       }
 
@@ -181,6 +186,7 @@ class FillUpActivity : AppCompatActivity() {
         // Handler code here.
         val cancelIntent = Intent(this, Timeline::class.java)
         startActivity(cancelIntent)
+        finish()
       }
 
   }
