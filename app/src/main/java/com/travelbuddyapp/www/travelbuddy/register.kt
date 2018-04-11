@@ -36,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase
 
 
 
+
+
 class register : AppCompatActivity() {
 
   val mAuth = FirebaseAuth.getInstance()
@@ -49,7 +51,7 @@ class register : AppCompatActivity() {
 
 
     //Treelike structure
-    mDatabase = FirebaseDatabase.getInstance().getReference("Names")
+    mDatabase = FirebaseDatabase.getInstance().getReference("User")
 
 
     registerBtn.setOnClickListener(View.OnClickListener {
@@ -73,13 +75,17 @@ class register : AppCompatActivity() {
        //if the stuff is stored correctly then
         if (task.isSuccessful) {
           //get the value of the current user
+//          val user = User(name, email,password)
           val user = mAuth.currentUser
           //unique Identification
           val uid = user!!.uid
           mDatabase.child(uid).child("Name").setValue(name)
+          mDatabase.child(uid).child("Email").setValue(email)
+          mDatabase.child(uid).child("Password").setValue(password)
           //Progress to the next activity with the user logged in.
           startActivity(Intent(this, Timeline::class.java))
           Toast.makeText(this, "Successful Registration!", Toast.LENGTH_LONG).show()
+          finish()
         }
         // if the storing of data was not successful then
         else {

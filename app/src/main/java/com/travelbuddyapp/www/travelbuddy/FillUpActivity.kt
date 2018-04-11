@@ -18,14 +18,22 @@ import java.util.Arrays.asList
 
 
 class FillUpActivity : AppCompatActivity() {
+
+  lateinit var mDatabase : DatabaseReference
+  val mAuth = FirebaseAuth.getInstance()
+  val user = mAuth.currentUser
+  //unique Identification
+  val uid = user!!.uid
+
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_fill_up)
 //    TodoItem.getInstance()
 
-    lateinit var mDatabase : DatabaseReference
 
-    var mAuth = FirebaseAuth.getInstance()
+    //Treelike structure
+    mDatabase = FirebaseDatabase.getInstance().getReference("User")
     var user = FirebaseAuth.getInstance().currentUser
 
     //Edit Text Boxes Declaration
@@ -107,7 +115,7 @@ class FillUpActivity : AppCompatActivity() {
             val fillUpData = FillUpData()
 
             //Set the values
-            fillUpData.id = counter
+//          fillUpData.userID = user!!.displayName
             fillUpData.volumeOfLitres = volumeOfLitres
             fillUpData.costPerLitre = costPerLitre
             fillUpData.odometerReading = odometerReading
@@ -125,11 +133,15 @@ class FillUpActivity : AppCompatActivity() {
               odometerEditText.error = "Please enter Odometer Reading."
             }
 
+
             //Cloud Storage
-            myFireId.push().setValue(counter)
-            myFireVolumeOfLitres.push().setValue(volumeOfLitres)
-            myFireCostPerLitreCostPerLitre.push().setValue(costPerLitre)
-            myFireOdometerReading.push().setValue(odometerReading)
+            mDatabase.child(uid).child("FillUp").child("Cost").push().setValue(costPerLitre)
+            mDatabase.child(uid).child("FillUp").child("VolumeOfLitres").push().setValue(volumeOfLitres)
+            mDatabase.child(uid).child("FillUp").child("OdometerReading").push().setValue(odometerReading)
+//            myFireId.push().setValue(user)
+//            myFireVolumeOfLitres.push().setValue(volumeOfLitres)
+//            myFireCostPerLitreCostPerLitre.push().setValue(costPerLitre)
+//            myFireOdometerReading.push().setValue(odometerReading)
 //            val uid = user!!.uid
 //            mDatabase.child(uid).child("Names").setValue(volumeOfLitres)
 //            mDatabase.child(uid).child("Names").setValue(costPerLitre)

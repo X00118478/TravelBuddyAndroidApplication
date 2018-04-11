@@ -39,10 +39,6 @@ import com.jjoe64.graphview.series.LineGraphSeries
 import java.util.*
 
 
-
-
-
-
 class Timeline : AppCompatActivity(), Runnable {
 
     lateinit var mDatabase : DatabaseReference
@@ -174,7 +170,7 @@ class Timeline : AppCompatActivity(), Runnable {
     userDataCallbutton = findViewById<Button>(R.id.userDataCall)
     userDataCallbutton .setOnClickListener {
       // Handler code here.
-      val intent = Intent(this, UserData::class.java)
+      val intent = Intent(this, UserD::class.java)
       startActivity(intent)
     }
 

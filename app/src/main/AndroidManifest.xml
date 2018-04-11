@@ -54,7 +54,7 @@
       android:name=".register"
       android:parentActivityName=".MainActivity" />
     <activity
-      android:name=".UserData"
+      android:name=".UserD"
       android:label="@string/title_activity_user_data"
       android:parentActivityName=".Timeline">
       <meta-data
