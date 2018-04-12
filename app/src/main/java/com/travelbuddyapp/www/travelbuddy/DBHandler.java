@@ -105,15 +105,14 @@ public class DBHandler extends SQLiteOpenHelper {
         // Add the entries to the List
         entryList.add(fillUpData);
       }
-      while(cursor.moveToNext());
+      while (cursor.moveToNext());
     }
     //Return our new List
     return entryList;
   }
 
   //Get the total entry records (Count)
-  public int getEntryCount()
-  {
+  public int getEntryCount() {
     String entryCountQuery = "SELECT * FROM " + TABLE_FILL_UP_ENTRY;
     SQLiteDatabase db = this.getReadableDatabase();
     Cursor cursor = db.rawQuery(entryCountQuery, null);
@@ -123,13 +122,12 @@ public class DBHandler extends SQLiteOpenHelper {
 
   //Time to allow an Update on the Entry in case the user made an error
   //UPDATE
-  public int updateFillUpData(FillUpData fillUpData)
-  {
+  public int updateFillUpData(FillUpData fillUpData) {
     SQLiteDatabase db = this.getWritableDatabase();
     ContentValues updateEntry = new ContentValues();
     updateEntry.put(COST_PER_LITRE, fillUpData.getCostPerLitre());
-    updateEntry.put(VOLUME_OF_LITRES,fillUpData.getVolumeOfLitres());
-    updateEntry.put(ODEMETER_READING,fillUpData.getOdometerReading());
+    updateEntry.put(VOLUME_OF_LITRES, fillUpData.getVolumeOfLitres());
+    updateEntry.put(ODEMETER_READING, fillUpData.getOdometerReading());
 
     //Update to ROW and return
     return db.update(TABLE_FILL_UP_ENTRY, updateEntry, ID + " =?",
@@ -137,11 +135,10 @@ public class DBHandler extends SQLiteOpenHelper {
   }
 
   //Delete an Entry
-  public void deleteEntry(FillUpData fillUpData)
-  {
+  public void deleteEntry(FillUpData fillUpData) {
     SQLiteDatabase db = this.getWritableDatabase();
     db.delete(TABLE_FILL_UP_ENTRY, ID + " =?",
-      new String[] {String.valueOf(fillUpData.getId())});
+      new String[]{String.valueOf(fillUpData.getId())});
     db.close();
   }
 

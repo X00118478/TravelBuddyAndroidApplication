@@ -41,7 +41,7 @@ import java.util.*
 
 class Timeline : AppCompatActivity(), Runnable {
 
-    lateinit var mDatabase : DatabaseReference
+  lateinit var mDatabase: DatabaseReference
   var mAuth = FirebaseAuth.getInstance()
   var user = FirebaseAuth.getInstance().currentUser
 
@@ -49,9 +49,7 @@ class Timeline : AppCompatActivity(), Runnable {
   var handler = Handler()
 
   override fun run() {
-    fun tipRun ()
-    {
-
+    fun tipRun() {
 
 
       handler.post(this)
@@ -106,9 +104,9 @@ class Timeline : AppCompatActivity(), Runnable {
     tipList.add("Eliminate Wind Resistance. ")
     tipList.add("Avoid Petrol Stations Near the Motorway. ")
     tipList.add("Don’t Wait Until Your Tank Is Almost Empty to Fill Up. ")
-    tipList.add("Monitor Your Tires. " )
+    tipList.add("Monitor Your Tires. ")
     tipList.add("Tune the Engine. ")
-    tipList.add("Change Filters. " )
+    tipList.add("Change Filters. ")
     tipList.add("Use the Correct Motor Oil. ")
     tipList.add("Turn Off the A/C. ")
     tipList.add("Manage Your Speed. ")
@@ -119,8 +117,6 @@ class Timeline : AppCompatActivity(), Runnable {
     val tipText = findViewById<TextView>(R.id.tip)
 
     tipText.text = tipList[tipSelected]
-
-
 
 
 //    for (i in 0..tipList.size) {
@@ -168,7 +164,7 @@ class Timeline : AppCompatActivity(), Runnable {
 //userDataCall
     var userDataCallbutton = Button(this)
     userDataCallbutton = findViewById<Button>(R.id.userDataCall)
-    userDataCallbutton .setOnClickListener {
+    userDataCallbutton.setOnClickListener {
       // Handler code here.
       val intent = Intent(this, UserD::class.java)
       startActivity(intent)
@@ -177,7 +173,7 @@ class Timeline : AppCompatActivity(), Runnable {
 //    TodoItem.getInstance()
     var fillupbutton = Button(this)
     fillupbutton = findViewById<Button>(R.id.newFillUp)
-    fillupbutton .setOnClickListener {
+    fillupbutton.setOnClickListener {
       // Handler code here.
       val intent = Intent(this, FillUpActivity::class.java)
       startActivity(intent)
@@ -186,7 +182,7 @@ class Timeline : AppCompatActivity(), Runnable {
 
     var refreshbutton = Button(this)
     refreshbutton = findViewById<Button>(R.id.refresh)
-    refreshbutton .setOnClickListener {
+    refreshbutton.setOnClickListener {
       // Handler code here.
       startActivity(intent)
       finish()
@@ -194,8 +190,7 @@ class Timeline : AppCompatActivity(), Runnable {
   }
 
 
-
-  fun userGuide(){
+  fun userGuide() {
     //Launch the User Guide Activity
     val intent = Intent(this, UserGuide::class.java)
     startActivity(intent)
@@ -218,15 +213,15 @@ class Timeline : AppCompatActivity(), Runnable {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     // Handle item selection
     return when {
-        item.itemId == R.id.user_guide -> {
-          userGuide()
-          true
-        }
-        item.itemId == R.id.action_logout -> {
-          logoutUser()
-           true
-        }
-        else -> super.onOptionsItemSelected(item)
+      item.itemId == R.id.user_guide -> {
+        userGuide()
+        true
+      }
+      item.itemId == R.id.action_logout -> {
+        logoutUser()
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
     }
   }
 

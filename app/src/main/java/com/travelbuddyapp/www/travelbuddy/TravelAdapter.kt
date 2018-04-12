@@ -9,13 +9,12 @@ import android.widget.ArrayAdapter
 /**
  * Created by AlexMcQuade on 05/04/2018.
  */
-class TravelAdapter(val mCtx: Context, private val  layoutResId: Int, val travelList: List<Travel>)
-  :ArrayAdapter<Travel>(mCtx, layoutResId, travelList)
-{
+class TravelAdapter(val mCtx: Context, private val layoutResId: Int, val travelList: List<Travel>)
+  : ArrayAdapter<Travel>(mCtx, layoutResId, travelList) {
   override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-    val layoutInflater : LayoutInflater = LayoutInflater.from(mCtx)
-    val view:View = layoutInflater.inflate(layoutResId, null)
+    val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
+    val view: View = layoutInflater.inflate(layoutResId, null)
 
 //    val current_Expense = view.findViewById<TextView>(R.id.current_Expense)
 
@@ -23,7 +22,6 @@ class TravelAdapter(val mCtx: Context, private val  layoutResId: Int, val travel
 
     var pricePerLitreValue = fillup.costPerLitre
 //    current_Expense.text = pricePerLitreValue.toString()
-
 
 
     return view

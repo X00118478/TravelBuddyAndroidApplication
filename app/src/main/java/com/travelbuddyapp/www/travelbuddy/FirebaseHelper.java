@@ -14,79 +14,71 @@ import java.util.ArrayList;
 
 public class FirebaseHelper {
 
-    DatabaseReference db;
-    Boolean saved=null;
-    ArrayList<Double> costList=new ArrayList<>();
+  DatabaseReference db;
+  Boolean saved = null;
+  ArrayList<Double> costList = new ArrayList<>();
 
-    public FirebaseHelper(DatabaseReference db) {
-      this.db = db;
+  public FirebaseHelper(DatabaseReference db) {
+    this.db = db;
+  }
+
+  //WRITE
+  public Boolean save(Travel travel) {
+    if (travel == null) {
+      saved = false;
+    } else {
+      try {
+        db.child("CostPerLitre").push().setValue(travel);
+        saved = true;
+
+      } catch (DatabaseException e) {
+        e.printStackTrace();
+        saved = false;
+      }
     }
 
-    //WRITE
-    public Boolean save(Travel travel)
-    {
-      if(travel==null)
-      {
-        saved=false;
-      }else
-      {
-        try
-        {
-          db.child("CostPerLitre").push().setValue(travel);
-          saved=true;
+    return saved;
+  }
 
-        }catch (DatabaseException e)
-        {
-          e.printStackTrace();
-          saved=false;
-        }
+  //READ
+  public ArrayList<Double> retrieve() {
+    db.addChildEventListener(new ChildEventListener() {
+      @Override
+      public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        fetchData(dataSnapshot);
       }
 
-      return saved;
-    }
+      @Override
+      public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+        fetchData(dataSnapshot);
 
-    //READ
-    public ArrayList<Double> retrieve()
-    {
-      db.addChildEventListener(new ChildEventListener() {
-        @Override
-        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-          fetchData(dataSnapshot);
-        }
-
-        @Override
-        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-          fetchData(dataSnapshot);
-
-        }
-
-        @Override
-        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        }
-
-        @Override
-        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-      });
-
-      return costList;
-    }
-
-    private void fetchData(DataSnapshot dataSnapshot)
-    {
-      costList.clear();
-
-      for (DataSnapshot ds : dataSnapshot.getChildren())
-      {
-        Double cost=ds.getValue(Travel.class).getCostPerLitre();
-        costList.add(cost);
       }
+
+      @Override
+      public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+      }
+
+      @Override
+      public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+      }
+
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+
+      }
+    });
+
+    return costList;
+  }
+
+  private void fetchData(DataSnapshot dataSnapshot) {
+    costList.clear();
+
+    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+      Double cost = ds.getValue(Travel.class).getCostPerLitre();
+      costList.add(cost);
     }
   }
+}

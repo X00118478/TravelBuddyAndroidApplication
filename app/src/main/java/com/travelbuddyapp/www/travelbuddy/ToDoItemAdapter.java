@@ -19,8 +19,8 @@ public class ToDoItemAdapter extends ArrayAdapter<FillUpData> {
    */
   int mLayoutResourceId;
 
- public ToDoItemAdapter(Context context, int layoutResourceId) {
-   super(context, layoutResourceId);
+  public ToDoItemAdapter(Context context, int layoutResourceId) {
+    super(context, layoutResourceId);
 
     mContext = context;
     mLayoutResourceId = layoutResourceId;

@@ -12,13 +12,12 @@ import android.widget.Button;
 
 public class FillUpData extends Activity {
 
- // EditText costPerLitre,volumeOfLitres,odometerReading;
+  // EditText costPerLitre,volumeOfLitres,odometerReading;
 
   Button save;
 
   @Override
-  public void onCreate(Bundle savedInstanceState)
-  {
+  public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_fill_up);
 
@@ -42,14 +41,12 @@ public class FillUpData extends Activity {
 
 
   //Default Constructor
-  public FillUpData()
-  {
+  public FillUpData() {
 
   }
 
   //Overloaded Constructor
-  public FillUpData(int id, double costPerLitre,double volumeOfLitres,double odometerReading)
-  {
+  public FillUpData(int id, double costPerLitre, double volumeOfLitres, double odometerReading) {
 
     this.id = id;
     this.costPerLitre = costPerLitre;
@@ -58,59 +55,53 @@ public class FillUpData extends Activity {
   }
 
 
-  public void setId(int id)
-  {
-    for(int i = 0; i < listSize;i++)
-    {
+  public void setId(int id) {
+    for (int i = 0; i < listSize; i++) {
       id = (setIncrementedID() + i);
       this.id = id;
     }
 
   }
 
-  public  int setIncrementedID()
-  {
+  public int setIncrementedID() {
     Number num = getId();
-    if (num == null)
-    {
+    if (num == null) {
       return 1;
-    }
-    else
-      return ((int)num + 1);
+    } else
+      return ((int) num + 1);
   }
+
   //Setters
-  public void setCostPerLitre(double costPerLitre)
-  {
+  public void setCostPerLitre(double costPerLitre) {
 
     this.costPerLitre = costPerLitre;
   }
-  public void setVolumeOfLitres(double volumeOfLitres)
-  {
+
+  public void setVolumeOfLitres(double volumeOfLitres) {
 
 
     this.volumeOfLitres = volumeOfLitres;
-    }
+  }
 
 
-  public void setOdometerReading(double odemeterReading)
-  {
+  public void setOdometerReading(double odemeterReading) {
     this.odometerReading = odemeterReading;
   }
+
   //Getters
-  public int getId()
-  {
+  public int getId() {
     return this.id;
   }
-  public double getCostPerLitre()
-  {
+
+  public double getCostPerLitre() {
     return this.costPerLitre;
   }
-  public double getVolumeOfLitres()
-  {
+
+  public double getVolumeOfLitres() {
     return this.volumeOfLitres;
   }
-  public double getOdometerReading()
-  {
+
+  public double getOdometerReading() {
 
     return this.odometerReading;
   }

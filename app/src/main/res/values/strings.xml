@@ -3,7 +3,7 @@
   <string name="button_add_new_fuel_fill_up">Add New Fill Up</string>
   <string name="button_add_entry">Save</string>
   <string name="button_cancel_entry">Cancel</string>
-  <string name="price_per_litre">€ / L :</string>
+  <string name="price_per_litre">Cost €:</string>
   <string name="odemeter_reading">Odometer :</string>
   <string name="volume_of_litres">Litres :</string>
   <string name="hint_price_per_litre">137.7</string>

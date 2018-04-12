@@ -35,13 +35,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
-
-
-
 class register : AppCompatActivity() {
 
   val mAuth = FirebaseAuth.getInstance()
-  lateinit var mDatabase : DatabaseReference
+  lateinit var mDatabase: DatabaseReference
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -54,13 +51,13 @@ class register : AppCompatActivity() {
     mDatabase = FirebaseDatabase.getInstance().getReference("User")
 
 
-    registerBtn.setOnClickListener(View.OnClickListener {
-      view -> registerUser()
+    registerBtn.setOnClickListener(View.OnClickListener { view ->
+      registerUser()
     })
 
   }
 
-  private fun registerUser () {
+  private fun registerUser() {
     val emailTxt = findViewById<View>(R.id.emailTxt) as EditText
     val passwordTxt = findViewById<View>(R.id.passwordTxt) as EditText
     val nameTxt = findViewById<View>(R.id.nameTxt) as EditText
@@ -72,7 +69,7 @@ class register : AppCompatActivity() {
     //If the Email & Password & Name are not empty then progress
     if (!email.isEmpty() && !password.isEmpty() && !name.isEmpty()) {
       mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
-       //if the stuff is stored correctly then
+        //if the stuff is stored correctly then
         if (task.isSuccessful) {
           //get the value of the current user
 //          val user = User(name, email,password)
@@ -95,7 +92,7 @@ class register : AppCompatActivity() {
     }
     //If the Text fields where left empty
     else {
-      Toast.makeText(this,"Text fields can not be blank!", Toast.LENGTH_LONG).show()
+      Toast.makeText(this, "Text fields can not be blank!", Toast.LENGTH_LONG).show()
     }
   }
 

@@ -1,10 +1,11 @@
 package com.travelbuddyapp.www.travelbuddy;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,13 +15,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 /**
  * Created by AlexMcQuade on 10/04/2018.
  */
 
-public class UserD extends Activity {
-  private static final  String TAG = "UserData";
-
+public class UserD extends AppCompatActivity {
+  private static final String TAG = "UserData";
 
 
   //Firebase Requirments
@@ -33,17 +35,22 @@ public class UserD extends Activity {
   private String name;
 
   private ListView listView;
-  private TextView textView;
-
+  private TextView textViewName;
+  private TextView textViewEmail;
+  private TextView texViewCost;
+  private TextView textViewFuel;
 
 
   @Override
-  protected void onCreate( Bundle savedInstanceState) {
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_user_data);
 
 //    listView = (ListView) findViewById(R.id.listView);
-    textView = (TextView)findViewById(R.id.nTextView);
+    textViewName = (TextView) findViewById(R.id.nTextView);
+    textViewEmail = (TextView) findViewById(R.id.etextView);
+    texViewCost = (TextView) findViewById(R.id.textViewTotalCost);
+    textViewFuel = (TextView) findViewById(R.id.textViewF);
 
     mAuthentication = FirebaseAuth.getInstance();
     mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -51,26 +58,58 @@ public class UserD extends Activity {
     FirebaseUser user = mAuthentication.getCurrentUser();
     userID = user.getUid();
 
-    DatabaseReference childName = myReference.child("User").child(user.getUid()).child("Name");
-    DatabaseReference childEmail = myReference.child("User").child(user.getUid()).child("Name");
+    DatabaseReference child = myReference.child("User").child(user.getUid());
 
-    childName.addListenerForSingleValueEvent(new ValueEventListener() {
+    child.addListenerForSingleValueEvent(new ValueEventListener() {
 
-       @Override
-       public void onDataChange(DataSnapshot datasnapshot){
+      @Override
+      public void onDataChange(DataSnapshot datasnapshot) {
 
-         if(datasnapshot.exists()){
-           String name;
-           name = (String) datasnapshot.getValue();
-           textView.setText("User Name: " + name);
+        if (datasnapshot.exists()) {
+          ArrayList<Long> costList = new ArrayList<>();
+          ArrayList<Long> fuelList = new ArrayList<>();
+          String name;
+          String email;
+          String password;
+          long sumCost = 0;
+          long sumFuel = 0;
+          email = (String) datasnapshot.child("Email").getValue();
+          name = (String) datasnapshot.child("Name").getValue();
 
-         }
-         else{
-           Log.d(TAG,"User Name Missing.");
-           textView.setText("User Name: ERROR");
-         }
+          for (DataSnapshot childSnapshot : datasnapshot.child("FillUp").child("Cost").getChildren()) {
+            costList.clear();
+            costList.add((Long) childSnapshot.getValue());
 
-       }
+
+
+
+            for (Long na : costList) {
+              sumCost = sumCost + na;
+            }
+          }
+
+          for (DataSnapshot childSnapshot : datasnapshot.child("FillUp").child("VolumeOfLitres").getChildren()) {
+            fuelList.clear();
+            fuelList.add((Long) childSnapshot.getValue());
+
+            for (Long na : fuelList) {
+              sumFuel = sumFuel + na;
+            }
+          }
+
+          //Output the Values retreived from Firebase
+          textViewName.setText("User Name: " + name);
+          textViewEmail.setText("User Email: " + email);
+          texViewCost.setText("Cost Total: €" + sumCost);
+          textViewFuel.setText("Litres Purchased: " + sumFuel);
+
+        } else {
+          Log.d(TAG, "User Name Missing.");
+          textViewName.setText("User Name: ERROR");
+          Toast.makeText(getBaseContext(),"Error Loading Database",Toast.LENGTH_SHORT).show();
+        }
+
+      }
 
       @Override
       public void onCancelled(DatabaseError databaseError) {
@@ -79,49 +118,5 @@ public class UserD extends Activity {
 
       }
     });
-
-
-
-    //ListView
-//    myReference.addValueEventListener(new ValueEventListener() {
-//      @Override
-//      public void onDataChange(DataSnapshot dataSnapshot) {
-//        displayData(dataSnapshot);
-//      }
-//
-//      @Override
-//      public void onCancelled(DatabaseError databaseError) {
-//
-//      }
-//    });
-
   }
-//  private void displayData(DataSnapshot dataSnapshot)
-//  {
-//    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
-//    {
-//      User userdata = new  User();
-//      //Get & Set Email
-//      userdata.setCostPerLitre(dataSnapshot1.child(userID).child("FillUp").getValue(User.class).getCostPerLitre());
-//      //Get & Set Name
-//      userdata.setOdometerReading(dataSnapshot1.child(userID).child("FillUp").getValue(User.class).getOdometerReading());
-//      //Get & Set Password
-//      userdata.setVolumeOfLitres(dataSnapshot1.child(userID).child("FillUp").getValue(User.class).getVolumeOfLitres());
-//
-//      //Log the Data
-//      Log.d(TAG,"Data: Name: " + userdata.getCostPerLitre());
-//      Log.d(TAG,"Data: Email: " + userdata.getOdometerReading());
-//      Log.d(TAG,"Data: Password: " + userdata.getVolumeOfLitres());
-//
-//      //Array to store all the data gathered.
-//      ArrayList<String> arrayList = new ArrayList<>();
-////      arrayList.add(userdata.getCostPerLitre());
-////      arrayList.add(userdata.getOdometerReading());
-////      arrayList.add(userdata.getVolumeOfLitres());
-//
-//      ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,arrayList);
-//      listView.setAdapter(adapter);
-//    }
-//  }
-
 }

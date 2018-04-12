@@ -9,23 +9,19 @@ public class Travel {
   double costPerLitre = 0;
 
 
-  public Travel()
-  {
+  public Travel() {
 
   }
 
-  public Travel(double costPerLitre)
-  {
+  public Travel(double costPerLitre) {
     this.costPerLitre = costPerLitre;
   }
 
-  public double getCostPerLitre()
-  {
+  public double getCostPerLitre() {
     return costPerLitre;
   }
 
-  public void setCostPerLitre()
-  {
+  public void setCostPerLitre() {
     this.costPerLitre = costPerLitre;
   }
 

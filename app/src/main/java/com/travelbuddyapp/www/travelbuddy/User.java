@@ -18,7 +18,8 @@ public class User {
   public String getName() {
     return name;
   }
-//  @PropertyName("Name")
+
+  //  @PropertyName("Name")
   @Keep
   public void setName(String name) {
     this.name = name;
@@ -27,7 +28,8 @@ public class User {
   public String getEmail() {
     return email;
   }
-@Keep
+
+  @Keep
   public void setEmail(String email) {
     this.email = email;
   }
@@ -35,25 +37,26 @@ public class User {
   public String getPassword() {
     return password;
   }
-@Keep
+
+  @Keep
   public void setPassword(String password) {
     this.password = password;
   }
 
-  public User(){}
+  public User() {
+  }
 
-  public  User (String name, String email,String password)
-  {
+  public User(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
   }
 
 
-
   public String getCostPerLitre() {
     return costPerLitre;
   }
+
   @Keep
   public void setCostPerLitre(String costPerLitre) {
     this.costPerLitre = costPerLitre;
@@ -62,6 +65,7 @@ public class User {
   public String getVolumeOfLitres() {
     return volumeOfLitres;
   }
+
   @Keep
   public void setVolumeOfLitres(String volumeOfLitres) {
     this.volumeOfLitres = volumeOfLitres;
@@ -70,6 +74,7 @@ public class User {
   public String getOdometerReading() {
     return odometerReading;
   }
+
   @Keep
   public void setOdometerReading(String odometerReading) {
     this.odometerReading = odometerReading;

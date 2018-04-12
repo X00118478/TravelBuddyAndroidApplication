@@ -12,14 +12,12 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.Arrays.asList
 
 
-
-
 //import okhttp3.OkHttpClient
 
 
 class FillUpActivity : AppCompatActivity() {
 
-  lateinit var mDatabase : DatabaseReference
+  lateinit var mDatabase: DatabaseReference
   val mAuth = FirebaseAuth.getInstance()
   val user = mAuth.currentUser
   //unique Identification
@@ -37,17 +35,17 @@ class FillUpActivity : AppCompatActivity() {
     var user = FirebaseAuth.getInstance().currentUser
 
     //Edit Text Boxes Declaration
-     var pricePerLitre = findViewById<EditText>(R.id.pricePerLitre)
+    var pricePerLitre = findViewById<EditText>(R.id.pricePerLitre)
     //focus the keyboard on the field then progress
     //pricePerLitre.setOnFocusChangeListener(this)
-     var litresEditText = findViewById<EditText>(R.id.litres)
-     var odometerEditText = findViewById<EditText>(R.id.odometerReading)
+    var litresEditText = findViewById<EditText>(R.id.litres)
+    var odometerEditText = findViewById<EditText>(R.id.odometerReading)
 
-     //Button Declaration
-     var saveEntry = Button(this)
-     var cancelEntry = Button(this)
+    //Button Declaration
+    var saveEntry = Button(this)
+    var cancelEntry = Button(this)
     //Count amount of times the save button is pushed
-     var counter = 0
+    var counter = 0
     val savesuccess = Intent(this, Timeline::class.java)
     val savefailure = Intent(this, FillUpActivity::class.java)
 
@@ -97,47 +95,59 @@ class FillUpActivity : AppCompatActivity() {
 
       val priceList = ArrayList(asList(0.0))
       val litresList = ArrayList(asList(0.0))
-      if (saveEntry.isPressed){
+      if (saveEntry.isPressed) {
         priceList.add(odometerReading)
-        litresList.add(volumeOfLitres)}
+        litresList.add(volumeOfLitres)
+      }
 
 
 
-      if(volumeOfLitres != null && costPerLitre != null && odometerReading != null)
-        {
-          try {
+      if (volumeOfLitres != null && costPerLitre != null && odometerReading != null) {
+        try {
 
-            //Increments the counter each time save is hit.
-            counter++
+          //Increments the counter each time save is hit.
+          counter++
 
-            //Storing on the client side
-            //object of FillUpData()
-            val fillUpData = FillUpData()
+          //Storing on the client side
+          //object of FillUpData()
+          val fillUpData = FillUpData()
 
-            //Set the values
+          //Set the values
 //          fillUpData.userID = user!!.displayName
-            fillUpData.volumeOfLitres = volumeOfLitres
-            fillUpData.costPerLitre = costPerLitre
-            fillUpData.odometerReading = odometerReading
+          fillUpData.volumeOfLitres = volumeOfLitres
+          fillUpData.costPerLitre = costPerLitre
+          fillUpData.odometerReading = odometerReading
 
-            if(pricePerLitreValue.isEmpty())
-            {
-              pricePerLitre.error = "Please enter a Price Per Litre."
-            }
-            if(litresValue.isEmpty())
-            {
-              litresEditText.error = "Please enter total amount of Litre."
-            }
-            if(odometerValue.isEmpty())
-            {
-              odometerEditText.error = "Please enter Odometer Reading."
-            }
+          if (pricePerLitreValue.isEmpty()) {
+            pricePerLitre.error = "Please enter a Price Per Litre."
+          }
+          if (litresValue.isEmpty()) {
+            litresEditText.error = "Please enter total amount of Litre."
+          }
+          if (odometerValue.isEmpty()) {
+            odometerEditText.error = "Please enter Odometer Reading."
+          }
 
-
-            //Cloud Storage
+          if (costPerLitre is Double) {
+            val cost = costPerLitre.toInt()
+            mDatabase.child(uid).child("FillUp").child("Cost").push().setValue(cost)
+          } else {
             mDatabase.child(uid).child("FillUp").child("Cost").push().setValue(costPerLitre)
+          }
+          if (volumeOfLitres is Double) {
+            val litre = volumeOfLitres.toInt()
+            mDatabase.child(uid).child("FillUp").child("VolumeOfLitres").push().setValue(litre)
+          } else {
             mDatabase.child(uid).child("FillUp").child("VolumeOfLitres").push().setValue(volumeOfLitres)
+          }
+          if (odometerReading is Double) {
+            val odometer = odometerReading.toInt()
+            mDatabase.child(uid).child("FillUp").child("OdometerReading").push().setValue(odometer)
+          } else {
             mDatabase.child(uid).child("FillUp").child("OdometerReading").push().setValue(odometerReading)
+          }
+
+
 //            myFireId.push().setValue(user)
 //            myFireVolumeOfLitres.push().setValue(volumeOfLitres)
 //            myFireCostPerLitreCostPerLitre.push().setValue(costPerLitre)
@@ -151,32 +161,25 @@ class FillUpActivity : AppCompatActivity() {
 //            myRef.child("Names").push().setValue("OdometerReading",odometerReading)
 
 
-            startActivity(savesuccess)
-            finish()
+          startActivity(savesuccess)
+          finish()
 
-          }
-          catch (e:Exception)
-          {
+        } catch (e: Exception) {
 
 
-            Toast.makeText(this,"Save unsuccessful, Try again.",Toast.LENGTH_LONG).show()
-            startActivity(savefailure)
-            finish()
-          }
-
-        }
-      else
-      {
-        try
-        {
-          Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
-
+          Toast.makeText(this, "Save unsuccessful, Try again.", Toast.LENGTH_LONG).show()
           startActivity(savefailure)
           finish()
         }
-        catch (e:Exception)
-        {
-          Toast.makeText(this,"Please fill up the fields to save.",Toast.LENGTH_LONG).show()
+
+      } else {
+        try {
+          Toast.makeText(this, "Please fill up the fields to save.", Toast.LENGTH_LONG).show()
+
+          startActivity(savefailure)
+          finish()
+        } catch (e: Exception) {
+          Toast.makeText(this, "Please fill up the fields to save.", Toast.LENGTH_LONG).show()
           startActivity(savefailure)
           finish()
         }
@@ -192,14 +195,14 @@ class FillUpActivity : AppCompatActivity() {
 //    Log.d("Insert: ", "Inserting ......")
 
 
-      //Cancel the Add new Fill up entry request
-      cancelEntry = findViewById(R.id.cancel)
-      cancelEntry.setOnClickListener {
-        // Handler code here.
-        val cancelIntent = Intent(this, Timeline::class.java)
-        startActivity(cancelIntent)
-        finish()
-      }
+    //Cancel the Add new Fill up entry request
+    cancelEntry = findViewById(R.id.cancel)
+    cancelEntry.setOnClickListener {
+      // Handler code here.
+      val cancelIntent = Intent(this, Timeline::class.java)
+      startActivity(cancelIntent)
+      finish()
+    }
 
   }
 }

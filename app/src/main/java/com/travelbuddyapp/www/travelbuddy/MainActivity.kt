@@ -48,26 +48,26 @@ class MainActivity : AppCompatActivity() {
 
     //when the button is selected then progress to the method call
     loginButton.setOnClickListener(View.OnClickListener
-    {
-      view -> login()
+    { view ->
+      login()
     })
 
     registerText.setOnClickListener(View.OnClickListener
-    {
-      view -> register()
+    { view ->
+      register()
     })
 
   }
 
   //this method will check the details exist in the Firebase DB & allow the user to log in or stop them completely Displaying a message in each case
-  private fun login () {
+  private fun login() {
     val emailTxt = findViewById<View>(R.id.emailText) as EditText
     var email = emailTxt.text.toString()
     val passwordTxt = findViewById<View>(R.id.passwordText) as EditText
     var password = passwordTxt.text.toString()
 
     if (!email.isEmpty() && !password.isEmpty()) {
-      this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener ( this, OnCompleteListener<AuthResult> { task ->
+      this.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener<AuthResult> { task ->
         if (task.isSuccessful) {
           startActivity(Intent(this, Timeline::class.java))
           Toast.makeText(this, "Log in Successful", Toast.LENGTH_LONG).show()
@@ -76,13 +76,13 @@ class MainActivity : AppCompatActivity() {
         }
       })
 
-    }else {
+    } else {
       Toast.makeText(this, "Text fields can not be blank!", Toast.LENGTH_SHORT).show()
     }
   }
 
   //This method opens the register activity  class
-  private fun register () {
+  private fun register() {
     val intent = Intent(this, register::class.java)
     startActivity(intent)
   }
