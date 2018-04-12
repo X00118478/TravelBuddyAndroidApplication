@@ -2,6 +2,7 @@ package com.travelbuddyapp.www.travelbuddy;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserD extends Activity {
   private static final  String TAG = "UserData";
+
+
 
   //Firebase Requirments
   private FirebaseDatabase mFirebaseDatabase;
@@ -44,23 +47,30 @@ public class UserD extends Activity {
 
     mAuthentication = FirebaseAuth.getInstance();
     mFirebaseDatabase = FirebaseDatabase.getInstance();
-    myReference = mFirebaseDatabase.getReference().child("User");
+    myReference = mFirebaseDatabase.getReference();
     FirebaseUser user = mAuthentication.getCurrentUser();
     userID = user.getUid();
 
+    DatabaseReference childName = myReference.child("User").child(user.getUid()).child("Name");
+    DatabaseReference childEmail = myReference.child("User").child(user.getUid()).child("Name");
 
+    childName.addListenerForSingleValueEvent(new ValueEventListener() {
 
-    myReference.child(userID).child("Name").addValueEventListener(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        User userdata = dataSnapshot.getValue(User.class);
-//        userdata.
-//        User userdata = new  User();
-//        userdata.setName(dataSnapshot.child(userID).child("Name").getValue(User.class).getName());
-//         name = userdata.getName();
-        textView.setText("Name : " + userdata);
+       @Override
+       public void onDataChange(DataSnapshot datasnapshot){
 
-      }
+         if(datasnapshot.exists()){
+           String name;
+           name = (String) datasnapshot.getValue();
+           textView.setText("User Name: " + name);
+
+         }
+         else{
+           Log.d(TAG,"User Name Missing.");
+           textView.setText("User Name: ERROR");
+         }
+
+       }
 
       @Override
       public void onCancelled(DatabaseError databaseError) {
