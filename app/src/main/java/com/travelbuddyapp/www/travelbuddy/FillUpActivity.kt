@@ -12,9 +12,6 @@ import com.google.firebase.database.FirebaseDatabase
 import java.util.Arrays.asList
 
 
-//import okhttp3.OkHttpClient
-
-
 class FillUpActivity : AppCompatActivity() {
 
   lateinit var mDatabase: DatabaseReference
@@ -59,17 +56,7 @@ class FillUpActivity : AppCompatActivity() {
     val myFireCostPerLitreCostPerLitre = database.getReference("CostPerLitre")
     val myFireOdometerReading = database.getReference("OdometerReading")
 
-//    val n = ArrayList<String>()
-//
-////your button
-//    val b: Button
-//
-/////your edittext
-//    val e: EditText
-//
-//
-//    if (saveEntry.isPressed)
-//      n.add(edit.getText().toString())
+
 
     //SAVE BUTTON
     //Save the new Entry of the data and return to the main activity
@@ -148,19 +135,6 @@ class FillUpActivity : AppCompatActivity() {
           }
 
 
-//            myFireId.push().setValue(user)
-//            myFireVolumeOfLitres.push().setValue(volumeOfLitres)
-//            myFireCostPerLitreCostPerLitre.push().setValue(costPerLitre)
-//            myFireOdometerReading.push().setValue(odometerReading)
-//            val uid = user!!.uid
-//            mDatabase.child(uid).child("Names").setValue(volumeOfLitres)
-//            mDatabase.child(uid).child("Names").setValue(costPerLitre)
-//            mDatabase.child(uid).child("Names").setValue(odometerReading)
-//            myRef.child("Names").push().setValue("VolumeOfLitres",volumeOfLitres)
-//            myRef.child("Names").push().setValue("CostPerLitre",costPerLitre)
-//            myRef.child("Names").push().setValue("OdometerReading",odometerReading)
-
-
           startActivity(savesuccess)
           finish()
 
@@ -186,14 +160,6 @@ class FillUpActivity : AppCompatActivity() {
       }
 
     }
-
-    // Create a DB Object to add the entries.
-//    val dbHandler = DBHandler(this)
-
-
-    //Display the inserts in a log.
-//    Log.d("Insert: ", "Inserting ......")
-
 
     //Cancel the Add new Fill up entry request
     cancelEntry = findViewById(R.id.cancel)

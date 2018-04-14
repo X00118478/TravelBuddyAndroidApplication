@@ -21,12 +21,6 @@ public class FillUpData extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_fill_up);
 
-    /*
-    final DBHandler db = new DBHandler(this);
-    Log.d("Insert: ", "Inserting ..");
-    */
-
-
   }
   //Attempt 1
   //declare the variables which will link to the button and SQL Lite

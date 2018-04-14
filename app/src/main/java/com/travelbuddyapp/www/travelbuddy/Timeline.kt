@@ -25,11 +25,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.jjoe64.graphview.DefaultLabelFormatter
@@ -45,13 +49,14 @@ class Timeline : AppCompatActivity(), Runnable {
   var mAuth = FirebaseAuth.getInstance()
   var user = FirebaseAuth.getInstance().currentUser
 
+  var tag = "Dashboard"
+  private val ERROR_DIALOG_REQUEST = 9001
+
   var rand = Random()
   var handler = Handler()
 
   override fun run() {
     fun tipRun() {
-
-
       handler.post(this)
 
     }
@@ -62,6 +67,10 @@ class Timeline : AppCompatActivity(), Runnable {
     setContentView(R.layout.activity_dashboard)
 
     supportActionBar
+
+    if (isServicesOK()) {
+      init()
+    }
 
     // Graphs on the Dashboard.
     val graphPrice = findViewById<View>(R.id.graphprice) as GraphView
@@ -117,12 +126,6 @@ class Timeline : AppCompatActivity(), Runnable {
     val tipText = findViewById<TextView>(R.id.tip)
 
     tipText.text = tipList[tipSelected]
-
-
-//    for (i in 0..tipList.size) {
-//      val tipText = findViewById<TextView>(R.id.tip)
-//      tipText.text = tipList[i]
-//    }
 
 
 // custom label formatter to show currency "EUR"
@@ -187,12 +190,25 @@ class Timeline : AppCompatActivity(), Runnable {
       startActivity(intent)
       finish()
     }
+
+
+  }
+
+  //MapCall
+  private fun init() {
+    var locateGaragebutton = Button(this)
+    locateGaragebutton = findViewById<Button>(R.id.locateGarage)
+    locateGaragebutton.setOnClickListener {
+      // Handler code here.
+      val intent = Intent(this, MapsActivity::class.java)
+      startActivity(intent)
+    }
   }
 
 
   fun userGuide() {
     //Launch the User Guide Activity
-    val intent = Intent(this, UserGuide::class.java)
+    val intent = Intent(this, UserGuideActivity::class.java)
     startActivity(intent)
 
   }
@@ -223,6 +239,28 @@ class Timeline : AppCompatActivity(), Runnable {
       }
       else -> super.onOptionsItemSelected(item)
     }
+  }
+
+  //Ensure that Google Play Services are available & enabled
+  fun isServicesOK(): Boolean {
+    Log.d(tag, "isServicesOK: checking google services version")
+
+    val available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this@Timeline)
+
+    if (available == ConnectionResult.SUCCESS) {
+      // user can make map requests
+      Log.d(tag, "isServicesOK: Google Play Services is working")
+      return true
+    } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
+      //Small Error
+      Log.d(tag, "isServicesOK: Slight Connection issue")
+      val dialog = GoogleApiAvailability.getInstance().getErrorDialog(this@Timeline, available, ERROR_DIALOG_REQUEST)
+      dialog.show()
+    } else {
+      //Big Error
+      Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show()
+    }
+    return false
   }
 
 

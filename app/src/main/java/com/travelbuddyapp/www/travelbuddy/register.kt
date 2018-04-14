@@ -71,8 +71,6 @@ class register : AppCompatActivity() {
       mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
         //if the stuff is stored correctly then
         if (task.isSuccessful) {
-          //get the value of the current user
-//          val user = User(name, email,password)
           val user = mAuth.currentUser
           //unique Identification
           val uid = user!!.uid

@@ -7,6 +7,21 @@
   android:background="@color/backgroundColor"
     tools:context="com.travelbuddyapp.www.travelbuddy.MainActivity">
 
+  <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    ads:adSize="BANNER"
+    ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+    ads:layout_constraintBottom_toBottomOf="parent"
+    ads:layout_constraintLeft_toLeftOf="parent"
+    ads:layout_constraintRight_toRightOf="parent"
+    ads:layout_constraintTop_toBottomOf="@+id/registerText" />
+
 
   <android.support.design.widget.TextInputLayout
     android:layout_width="340dp"
@@ -41,14 +56,16 @@
       android:layout_height="wrap_content"
       android:hint="@string/prompt_password"
       android:inputType="textPassword"
-      android:textColor="@color/UserText" />
+      android:textColor="@color/UserText"
+      android:imeOptions="actionDone"/>
   </android.support.design.widget.TextInputLayout>
 
   <Button
     android:id="@+id/loginButton"
     android:layout_width="340dp"
     android:layout_height="52dp"
-    android:layout_marginTop="108dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="44dp"
     android:background="@drawable/rectangle_button"
     android:text="Login"
     android:textColor="@color/buttonText"
@@ -70,5 +87,7 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/loginButton"
     tools:text="@string/action_sign_in" />
+
+
 
 </android.support.constraint.ConstraintLayout>

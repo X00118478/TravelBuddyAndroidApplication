@@ -39,4 +39,28 @@
   <string name="logout">Logout</string>
 
   <string name="locate_Closest_Garage">Locate Garage</string>
+  <string name="title_activity_maps">Map</string>
+  <string name="register">Register</string>
+  <string name="textview">TextView</string>
+
+  <string name="user_Guide_Text">
+    Developed by: Alex Mac Uaid.\n
+    Student Number: X00118478.\n
+    Fourth Year Project.\n
+    Institute of Technology Tallaght Dublin.\n
+    Application Name : Travel Buddy.
+    \n
+    \n
+    Features:\n
+    *Add gas ,mileage, cost expenses \n
+     effortlessly.\n\n
+    *Instant backup on the cloud.\n\n
+    *Sync across multiple devices.\n\n
+    *Various Tips and graphs available to \n track mileage,improve fuel economy, find running costs.\n\n
+    *View Your Data.\n\n
+    *Retrieve your Personal Profile When \n upgrading your phone.\n\n
+    *Google Maps API Displaying Current \n Location. \n\n
+    *Automatic Data Removal after one year.\n\n
+    *AdMob Ads to ensure the application \n remains Free. \n
+    </string>
 </resources>

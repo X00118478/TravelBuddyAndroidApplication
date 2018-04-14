@@ -46,6 +46,8 @@ public class UserD extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_user_data);
 
+    Toast.makeText(this, "User Profile Loading", Toast.LENGTH_SHORT).show();
+
 //    listView = (ListView) findViewById(R.id.listView);
     textViewName = (TextView) findViewById(R.id.nTextView);
     textViewEmail = (TextView) findViewById(R.id.etextView);

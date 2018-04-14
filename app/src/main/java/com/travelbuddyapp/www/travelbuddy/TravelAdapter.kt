@@ -21,7 +21,6 @@ class TravelAdapter(val mCtx: Context, private val layoutResId: Int, val travelL
     val fillup = travelList[position]
 
     var pricePerLitreValue = fillup.costPerLitre
-//    current_Expense.text = pricePerLitreValue.toString()
 
 
     return view
