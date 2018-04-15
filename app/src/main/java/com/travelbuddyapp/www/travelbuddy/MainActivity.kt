@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     val emailTxt = findViewById<View>(R.id.emailText) as EditText
     var email = emailTxt.text.toString()
     val passwordTxt = findViewById<View>(R.id.passwordText) as EditText
+
     var password = passwordTxt.text.toString()
 
     if (!email.isEmpty() && !password.isEmpty()) {
